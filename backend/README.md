@@ -106,22 +106,15 @@ python test_flaskr.py
 ## API Reference
 
 ### Getting Started 
-Base URL: Currently this application is only hosted locally. The backend is hosted at http://127.0.0.1:5432/
+Base URL: Currently this application is only hosted locally. The backend is hosted at localhost:5432/
 Authentication: This version does not require authentication or API keys.
-
-### Error Handling
-
-There are four types of errors the API will return`;
-- 400 - bad request
-- 404 - resource not found
-- 422 - unprocessable
 
 ### Endpoints
 
 #### GET '/categories'
 - Fetches a dictionary of all available categories.
 - Returns an object with a single key, categories, that contains a object of id: category_string key:value pairs. 
-- Sample: `curl http://127.0.0.1:5432/categories`
+- Sample: `curl localhost:5432/categories`
 ```
 {
   "categories: {
@@ -139,7 +132,7 @@ There are four types of errors the API will return`;
 #### GET '/categories/<int:id>/questions'
 - Gets all questions in a specified category by id using url parameters
 - Returns a JSON object with paginated questions from a specified category
-- Sample: `curl http://127.0.0.1:5432/categories/3/questions`
+- Sample: `curl localhost:5432/categories/3/questions`
 ```
 {
   "current_category": "Geography",
@@ -176,7 +169,7 @@ There are four types of errors the API will return`;
   - Includes a list of categories
   - Paginated in groups of 10
   - Includes details of question such as category, difficulty, answer and id
-- Sample: `curl http://127.0.0.1:5432/questions`
+- Sample: `curl localhost:5432/questions`
 ```
 {
   "categories": {
@@ -266,7 +259,7 @@ There are four types of errors the API will return`;
 
 #### POST '/questions'
 - Creates a new question using JSON request parameters in the database
-- Sample: `curl http://127.0.0.1:5432/questions -X POST -H "Content-Type: application/json" -d '{"question": "which is the champion team of the champions 2020?", "answer": "Bayern", "difficulty": 3, "category": "6" }'`
+- Sample: `curl localhost:5432/questions -X POST -H "Content-Type: application/json" -d '{"question": "which is the champion team of the champions 2020?", "answer": "Bayern", "difficulty": 3, "category": "6" }'`
 - Created question:
 ```
 {
@@ -362,7 +355,7 @@ There are four types of errors the API will return`;
 #### POST '/questions'
 - Searches for questions using a search term, 
 - Returns a JSON object with paginated questions matching the search term
-- Sample: `curl http://127.0.0.1:5432/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm": "author"}'`
+- Sample: `curl localhost:5432/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm": "author"}'`
 ```
 {
   "questions": [
@@ -382,7 +375,7 @@ There are four types of errors the API will return`;
 #### DELETE '/questions/<int:id>'
 - Deletes a question by id using url parameters
 - Returns id of deleted questions if successful
-- Sample: `curl -X DELETE http://127.0.0.1:5432/questions/2`
+- Sample: `curl -X DELETE localhost:5432/questions/2`
 ```
 {
   "deleted": 2,
@@ -391,13 +384,11 @@ There are four types of errors the API will return`;
 }
 ```
 
-
-
 #### POST '/quizzes'
 - Allows user to play the trivia game
 - Uses JSON request parameters of a chosen category and previous questions
 - Returns JSON object with random available questions which are not among previous used questions
-- Sample: `curl http://127.0.0.1:5432/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [10, 11], "quiz_category": {"type": "Sports", "id": "6"}}'`
+- Sample: `curl localhost:5432/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [10, 11], "quiz_category": {"type": "Sports", "id": "6"}}'`
 ```
 {
   "question": {
@@ -410,3 +401,12 @@ There are four types of errors the API will return`;
   "success": true
 }
 ```
+
+### Error Handling
+
+There are four types of errors the API will return`;
+- 400 - bad request
+- 404 - resource not found
+- 405 - method not allowed
+- 422 - unprocessable
+- 500 - internal server error
